@@ -1,0 +1,29 @@
+[
+    {
+      "name": "cloudsim",
+      "image": "bhkim81/cloudsim:0.0.4",
+      "cpu": 0,
+      "memoryReservation": 512,
+      "essential": true,
+      "portMappings": [
+        { "containerPort": 22, "protocol": "tcp" },
+        { "containerPort": 23001, "protocol": "tcp" },
+        { "containerPort": 23002, "protocol": "tcp" }
+      ],
+      "environment": [
+        {
+          "name": "Project",
+          "value": "CloudSIM"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "secretOptions": null,
+        "options": {
+          "awslogs-group": "/ecs/cloud-sim",
+          "awslogs-region": "ap-northeast-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
