@@ -5,7 +5,7 @@ RUN apt-get update && \
 # && \#	rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /var/run/sshd && \
-	echo 'root:ansible' | chpasswd && \
+	echo 'root:xxxxxxx' | chpasswd && \
 	sed -i 's/#PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
 	sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
 	echo "export VISIBLE=now" >> /etc/profile

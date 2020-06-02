@@ -25,7 +25,7 @@ func main() {
 
 func makeConsumer(quit chan int) {
 
-	providerAddr := "cloudsim.ntel.ml:23002"
+	providerAddr := "13.125.179.157:23002"
 	conn, err := net.Dial("tcp", providerAddr)
 	checkError(err)
 
@@ -51,7 +51,7 @@ func makeConsumer(quit chan int) {
 
 func makeProvider() {
 
-	consumerAddr := "cloudsim.ntel.ml:23001"
+	consumerAddr := "13.125.179.157:23001"
 	conn, err := net.Dial("tcp", consumerAddr)
 	checkError(err)
 
