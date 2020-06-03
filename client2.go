@@ -13,46 +13,16 @@ import (
 func main() {
 
 	quit := make(chan int)
-
-	go makeConsumer(quit)
-	time.Sleep(time.Duration(3) * time.Second)
-
-	go makeProvider()
+	go makeProviderOnly(quit)
 
 	<-quit
 
 }
 
-func makeConsumer(quit chan int) {
+func makeProviderOnly(quit chan int) {
 
-	providerAddr := "cloudsim.ntel.ml:23002"
+	providerAddr := "127.0.0.1:23001"
 	conn, err := net.Dial("tcp", providerAddr)
-	checkError(err)
-
-	data := make([]byte, 512)
-
-	for {
-		var s string
-		fmt.Scanln(&s)
-		conn.Write([]byte(s))
-		time.Sleep(time.Duration(3) * time.Second)
-
-		n, err := conn.Read(data)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		fmt.Println("Returned : " + string(data[:n]))
-	}
-
-	quit <- 0
-}
-
-func makeProvider() {
-
-	consumerAddr := "cloudsim.ntel.ml:23001"
-	conn, err := net.Dial("tcp", consumerAddr)
 	checkError(err)
 
 	data := make([]byte, 512)
@@ -70,6 +40,8 @@ func makeProvider() {
 		fmt.Println("Returing back : " + morestrings.ReverseRunes(string(data[:n])))
 		conn.Write([]byte(morestrings.ReverseRunes(string(data[0:n]))))
 	}
+
+	quit <- 0
 
 }
 

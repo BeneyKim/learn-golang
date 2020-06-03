@@ -1,0 +1,10 @@
+2020/06/02 17:30:21.959270 server.go:51: New Provider is connected from 127.0.0.1:58411
+2020/06/02 17:30:22.074274 server.go:52: Current size of pool is 1
+2020/06/02 17:31:01.926504 server.go:149: Error from connection 127.0.0.1:58411 : read tcp 127.0.0.1:23001->127.0.0.1:58411: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/02 17:31:01.928503 server.go:66: A Provider 127.0.0.1:58411 is Removed from Pool
+2020/06/02 17:31:10.587252 server.go:51: New Provider is connected from 127.0.0.1:58424
+2020/06/02 17:31:10.588255 server.go:52: Current size of pool is 1
+2020/06/02 17:31:10.589251 server.go:81: A Provider 127.0.0.1:58424 is Removed from Pool
+2020/06/02 17:31:10.589251 server.go:82: Current size of pool is 0
+2020/06/02 17:31:10.591255 server.go:183: Start Reply between (127.0.0.1:58424 --> 127.0.0.1:58423)
+2020/06/02 17:31:34.862734 server.go:149: Error from connection 127.0.0.1:58424 : read tcp 127.0.0.1:23001->127.0.0.1:58424: wsarecv: An existing connection was forcibly closed by the remote host.
