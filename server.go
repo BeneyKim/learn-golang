@@ -10,6 +10,8 @@ import (
 	"os"
 	"runtime"
 	"sync"
+
+	"github.com/google/uuid"
 )
 
 // RelayConn represents
@@ -27,71 +29,104 @@ func (thisRelayConn RelayConn) String() string {
 	if thisRelayConn.consumer != nil {
 		consumer = thisRelayConn.consumer.RemoteAddr().String()
 	}
-	return fmt.Sprintf("(%v --> %v)", provider, consumer)
+	return fmt.Sprintf("Provider: %v ---> Consumer: %v", provider, consumer)
 }
 
 // RelayConnPool represents
 type RelayConnPool struct {
-	pool map[string]*RelayConn
-	mux  sync.Mutex
-	ch   chan string
+	providerPool map[string]*RelayConn
+	consumerPool map[string]*RelayConn
+	mutex        sync.Mutex
 }
 
-// RegisterProvider stores service provider informaion
-func (thisRelayConnPool *RelayConnPool) registerProvider(newProviderConn net.Conn) (string, *RelayConn) {
-	remoteAddr := newProviderConn.RemoteAddr().String()
-
-	thisRelayConnPool.mux.Lock()
-	defer thisRelayConnPool.mux.Unlock()
-	// Lock so only one goroutine at a time can access the map c.v.
-	newRelayConn := new(RelayConn)
-	newRelayConn.provider = newProviderConn
-	newRelayConn.consumer = nil
-	thisRelayConnPool.pool[remoteAddr] = newRelayConn
-	log.Println("New Provider is connected from", remoteAddr)
-	log.Println("Current size of pool is", len(thisRelayConnPool.pool))
-	thisRelayConnPool.ch <- remoteAddr
-
-	return remoteAddr, newRelayConn
+func (thisRelayConnPool RelayConnPool) String() string {
+	return fmt.Sprintf("\n%s\nProvider Pool Length: %v\n%v\nConsumer Pool Length: %v\n%v\n%s\n",
+		"----- Relay Connection Pool Status -----",
+		len(thisRelayConnPool.providerPool),
+		thisRelayConnPool.providerPool,
+		len(thisRelayConnPool.consumerPool),
+		thisRelayConnPool.consumerPool,
+		"----------------------------------------")
 }
 
-// UnregisterProvider stores service provider informaion
-func (thisRelayConnPool *RelayConnPool) unregisterProvider(key string) {
-	<-thisRelayConnPool.ch
-	thisRelayConnPool.mux.Lock()
-	defer thisRelayConnPool.mux.Unlock()
+// registerProvider stores service provider informaion
+func (thisRelayConnPool *RelayConnPool) registerProvider(newProviderConn net.Conn) (key string, newRelayConn *RelayConn) {
 
-	// Lock so only one goroutine at a time can access the map c.v.
-	delete(thisRelayConnPool.pool, key)
-	log.Printf("A Provider %s is Removed from Pool\n", key)
-}
+	thisRelayConnPool.mutex.Lock()
+	defer thisRelayConnPool.mutex.Unlock()
+	defer log.Println(thisRelayConnPool)
 
-// RegisterConsumer retrieve service provider informaion
-func (thisRelayConnPool *RelayConnPool) registerConsumer(newConsumerConn net.Conn) *RelayConn {
+	// key = newProviderConn.RemoteAddr().String()
+	key = uuid.New().String()
 
-	<-thisRelayConnPool.ch
-	thisRelayConnPool.mux.Lock()
-	defer thisRelayConnPool.mux.Unlock()
-
-	for key, realyConn := range thisRelayConnPool.pool {
-		// provider.conn.
-		if realyConn.consumer == nil {
-			delete(thisRelayConnPool.pool, key)
-
-			log.Printf("A Provider %s is Removed from Pool\n", key)
-			log.Println("Current size of pool is", len(thisRelayConnPool.pool))
-			realyConn.consumer = newConsumerConn
-			return realyConn
+	for k, conn := range thisRelayConnPool.consumerPool {
+		if conn.provider == nil {
+			delete(thisRelayConnPool.consumerPool, k)
+			newRelayConn = conn
+			newRelayConn.provider = newProviderConn
+			log.Printf("Starting Reply between %s\n", newRelayConn)
+			return
 		}
 	}
 
-	return nil
+	newRelayConn = new(RelayConn)
+	newRelayConn.provider = newProviderConn
+	newRelayConn.consumer = nil
+	thisRelayConnPool.providerPool[key] = newRelayConn
+	return
+}
+
+// unregisterProvider stores service provider informaion
+func (thisRelayConnPool *RelayConnPool) unregisterProvider(key string) {
+
+	thisRelayConnPool.mutex.Lock()
+	defer thisRelayConnPool.mutex.Unlock()
+	defer log.Println(thisRelayConnPool)
+
+	delete(thisRelayConnPool.providerPool, key)
+}
+
+// registerConsumer retrieve service provider informaion
+func (thisRelayConnPool *RelayConnPool) registerConsumer(newConsumerConn net.Conn) (key string, newRelayConn *RelayConn) {
+
+	thisRelayConnPool.mutex.Lock()
+	defer thisRelayConnPool.mutex.Unlock()
+	defer log.Println(thisRelayConnPool)
+
+	// key = newConsumerConn.RemoteAddr().String()
+	key = uuid.New().String()
+
+	for k, conn := range thisRelayConnPool.providerPool {
+		if conn.consumer == nil {
+			delete(thisRelayConnPool.providerPool, k)
+			newRelayConn = conn
+			newRelayConn.consumer = newConsumerConn
+			log.Printf("Starting Reply between %s\n", newRelayConn)
+			return
+		}
+	}
+
+	newRelayConn = new(RelayConn)
+	newRelayConn.provider = nil
+	newRelayConn.consumer = newConsumerConn
+	thisRelayConnPool.consumerPool[key] = newRelayConn
+	return
+}
+
+// unregisterProvider stores service provider informaion
+func (thisRelayConnPool *RelayConnPool) unregisterConsumer(key string) {
+
+	thisRelayConnPool.mutex.Lock()
+	defer thisRelayConnPool.mutex.Unlock()
+	defer log.Println(thisRelayConnPool)
+
+	delete(thisRelayConnPool.consumerPool, key)
 }
 
 func main() {
 
 	// Log Setting
-	logFile, err := os.OpenFile("csimlog", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	logFile, err := os.OpenFile("cloud-sim-log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatalf("error opening file: %v", err)
 	}
@@ -101,8 +136,8 @@ func main() {
 
 	// Business Logic
 	relayConns := new(RelayConnPool)
-	relayConns.pool = make(map[string]*RelayConn)
-	relayConns.ch = make(chan string, 10)
+	relayConns.providerPool = make(map[string]*RelayConn)
+	relayConns.consumerPool = make(map[string]*RelayConn)
 	quitProvider := make(chan int)
 	quitConsumer := make(chan int)
 
@@ -125,6 +160,8 @@ func handleProviders(quit chan int, relayConnPool *RelayConnPool) {
 			continue
 		}
 
+		log.Printf("New Provider is Connected from %s\n", conn.RemoteAddr().String())
+
 		key, relayConn := relayConnPool.registerProvider(conn)
 		go handleProvider(key, relayConn, relayConnPool)
 	}
@@ -146,7 +183,7 @@ func handleProvider(key string, relayConn *RelayConn, relayConnPool *RelayConnPo
 		out := relayConn.consumer // could be nil
 
 		if err != nil {
-			log.Printf("Error from connection %s : %v", in.RemoteAddr().String(), err)
+			log.Printf("Error from Provider(%s) : %v", key, err)
 
 			if out == nil {
 				relayConnPool.unregisterProvider(key)
@@ -178,19 +215,19 @@ func handleConsumers(quit chan int, relayConnPool *RelayConnPool) {
 			continue
 		}
 
-		relayConn := relayConnPool.registerConsumer(conn)
+		log.Printf("New Customer is Connected from %s\n", conn.RemoteAddr().String())
 
-		log.Printf("Start Reply between %s\n", relayConn)
-		go handleConnection(relayConn)
+		key, relayConn := relayConnPool.registerConsumer(conn)
+		go handleConsumer(key, relayConn, relayConnPool)
 	}
 
 	quit <- 0
 }
 
-func handleConnection(relayConn *RelayConn) {
+func handleConsumer(key string, relayConn *RelayConn, relayConnPool *RelayConnPool) {
 
 	in := relayConn.consumer
-	out := relayConn.provider
+	// relay.consumer is still nil here.
 
 	defer in.Close()
 
@@ -198,15 +235,25 @@ func handleConnection(relayConn *RelayConn) {
 	for {
 		// read upto 512 bytes
 		n, err := in.Read(buf[0:])
+		out := relayConn.provider // could be nil
+
 		if err != nil {
-			out.Close()
+			log.Printf("Error from Consumer(%s) : %v", key, err)
+
+			if out == nil {
+				relayConnPool.unregisterConsumer(key)
+			} else {
+				out.Close()
+			}
 			return
 		}
 
-		// write the n bytes read
-		_, err2 := out.Write(buf[0:n])
-		if err2 != nil {
-			return
+		if out != nil {
+			// write the n bytes read
+			_, err2 := out.Write(buf[0:n])
+			if err2 != nil {
+				return
+			}
 		}
 	}
 }

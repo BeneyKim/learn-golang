@@ -21,6 +21,7 @@ ADD startup.sh /
 RUN mkdir -p ${WORK_DIR}
 COPY ${SERVICE_NAME}.go ${WORK_DIR}
 COPY ${EXAMPLE_NAME}.go ${WORK_DIR}
+RUN go get github.com/google/uuid
 RUN go build -o ${WORK_DIR}${SERVICE_NAME} ${WORK_DIR}${SERVICE_NAME}.go
 
 EXPOSE 23001 23002

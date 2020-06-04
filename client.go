@@ -10,23 +10,50 @@ import (
 	"github.com/BeneyKim/learn-golang/morestrings"
 )
 
+const (
+	// SERVER_ADDRESS = "cloudsim.ntel.ml"
+	SERVER_ADDRESS = "127.0.0.1"
+)
+
 func main() {
 
 	quit := make(chan int)
 
 	go makeConsumer(quit)
-	time.Sleep(time.Duration(3) * time.Second)
-
 	go makeProvider()
 
 	<-quit
 
 }
 
+func makeProvider() {
+
+	providerAddr := fmt.Sprintf("%s:%d", SERVER_ADDRESS, 23001)
+	conn, err := net.Dial("tcp", providerAddr)
+	checkError(err)
+
+	data := make([]byte, 512)
+
+	for {
+		n, err := conn.Read(data)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		fmt.Println("Server send : " + string(data[:n]))
+		time.Sleep(time.Duration(3) * time.Second)
+
+		fmt.Println("Returing back : " + morestrings.ReverseRunes(string(data[:n])))
+		conn.Write([]byte(morestrings.ReverseRunes(string(data[0:n]))))
+	}
+
+}
+
 func makeConsumer(quit chan int) {
 
-	providerAddr := "cloudsim.ntel.ml:23002"
-	conn, err := net.Dial("tcp", providerAddr)
+	consumerAddr := fmt.Sprintf("%s:%d", SERVER_ADDRESS, 23002)
+	conn, err := net.Dial("tcp", consumerAddr)
 	checkError(err)
 
 	data := make([]byte, 512)
@@ -47,30 +74,6 @@ func makeConsumer(quit chan int) {
 	}
 
 	quit <- 0
-}
-
-func makeProvider() {
-
-	consumerAddr := "cloudsim.ntel.ml:23001"
-	conn, err := net.Dial("tcp", consumerAddr)
-	checkError(err)
-
-	data := make([]byte, 512)
-
-	for {
-		n, err := conn.Read(data)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-
-		fmt.Println("Server send : " + string(data[:n]))
-		time.Sleep(time.Duration(3) * time.Second)
-
-		fmt.Println("Returing back : " + morestrings.ReverseRunes(string(data[:n])))
-		conn.Write([]byte(morestrings.ReverseRunes(string(data[0:n]))))
-	}
-
 }
 
 func checkError(err error) {

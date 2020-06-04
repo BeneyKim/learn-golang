@@ -1,0 +1,295 @@
+2020/06/03 14:04:11.316873 server.go:109: ----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[127.0.0.1:56610:Provider: nil ---> Consumer: 127.0.0.1:56610]
+----------------------------------------
+
+2020/06/03 14:04:14.370994 server.go:64: Start Reply between Provider: 127.0.0.1:56613 ---> Consumer: 127.0.0.1:56610
+2020/06/03 14:04:14.370994 server.go:65: ----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:04:38.516255 server.go:233: Error from Consumer 127.0.0.1:56610 : read tcp 127.0.0.1:23002->127.0.0.1:56610: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:04:38.516255 server.go:180: Error from Provider 127.0.0.1:56613 : read tcp 127.0.0.1:23001->127.0.0.1:56613: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:04:55.071339 server.go:73: ----- Relay Connection Pool Status -----
+Provider Pool Length: 1
+map[127.0.0.1:56621:Provider: 127.0.0.1:56621 ---> Consumer: nil]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:05:18.345887 server.go:73: ----- Relay Connection Pool Status -----
+Provider Pool Length: 2
+map[127.0.0.1:56621:Provider: 127.0.0.1:56621 ---> Consumer: nil 127.0.0.1:56628:Provider: 127.0.0.1:56628 ---> Consumer: nil]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:05:31.678389 server.go:100: Start Reply between Provider: 127.0.0.1:56628 ---> Consumer: 127.0.0.1:56635
+2020/06/03 14:05:31.678389 server.go:101: ----- Relay Connection Pool Status -----
+Provider Pool Length: 1
+map[127.0.0.1:56621:Provider: 127.0.0.1:56621 ---> Consumer: nil]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:05:34.675449 server.go:73: ----- Relay Connection Pool Status -----
+Provider Pool Length: 2
+map[127.0.0.1:56621:Provider: 127.0.0.1:56621 ---> Consumer: nil 127.0.0.1:56636:Provider: 127.0.0.1:56636 ---> Consumer: nil]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:06:19.624320 server.go:180: Error from Provider 127.0.0.1:56636 : read tcp 127.0.0.1:23001->127.0.0.1:56636: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:06:19.624320 server.go:84: ----- Relay Connection Pool Status -----
+Provider Pool Length: 1
+map[127.0.0.1:56621:Provider: 127.0.0.1:56621 ---> Consumer: nil]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:06:19.624320 server.go:233: Error from Consumer 127.0.0.1:56635 : read tcp 127.0.0.1:23002->127.0.0.1:56635: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:06:19.624320 server.go:180: Error from Provider 127.0.0.1:56628 : read tcp 127.0.0.1:23001->127.0.0.1:56628: use of closed network connection
+2020/06/03 14:06:39.204777 server.go:180: Error from Provider 127.0.0.1:56621 : read tcp 127.0.0.1:23001->127.0.0.1:56621: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:06:39.204777 server.go:84: ----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:15:44.754705 server.go:218: New Customer is Connected from 127.0.0.1:56899
+2020/06/03 14:15:44.856705 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[3355926e-69a5-43d6-823b-bacd02fe24ab:Provider: nil ---> Consumer: 127.0.0.1:56899]
+----------------------------------------
+
+2020/06/03 14:15:47.746735 server.go:163: New Provider is Connected from 127.0.0.1:56900
+2020/06/03 14:15:47.746735 server.go:67: Starting Reply between Provider: 127.0.0.1:56900 ---> Consumer: 127.0.0.1:56899
+2020/06/03 14:15:47.746735 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:16:17.836746 server.go:186: Error from Provider(7a37552c-1e96-4d8c-98de-179813eddf95) : read tcp 127.0.0.1:23001->127.0.0.1:56900: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:16:17.836746 server.go:241: Error from Consumer(3355926e-69a5-43d6-823b-bacd02fe24ab) : read tcp 127.0.0.1:23002->127.0.0.1:56899: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:16:19.058763 server.go:218: New Customer is Connected from 127.0.0.1:56907
+2020/06/03 14:16:19.058763 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[433408c4-daca-46f0-a340-5aa691e5de41:Provider: nil ---> Consumer: 127.0.0.1:56907]
+----------------------------------------
+
+2020/06/03 14:16:22.054792 server.go:163: New Provider is Connected from 127.0.0.1:56908
+2020/06/03 14:16:22.054792 server.go:67: Starting Reply between Provider: 127.0.0.1:56908 ---> Consumer: 127.0.0.1:56907
+2020/06/03 14:16:22.055792 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:21:06.865798 server.go:241: Error from Consumer(433408c4-daca-46f0-a340-5aa691e5de41) : read tcp 127.0.0.1:23002->127.0.0.1:56907: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:21:06.865798 server.go:186: Error from Provider(15a962b2-7f1f-4634-92b9-4bd1c3de1343) : read tcp 127.0.0.1:23001->127.0.0.1:56908: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:21:07.584787 server.go:218: New Customer is Connected from 127.0.0.1:56956
+2020/06/03 14:21:07.584787 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[e39f6c4f-40df-49e7-a646-c5cf6030bdb1:Provider: nil ---> Consumer: 127.0.0.1:56956]
+----------------------------------------
+
+2020/06/03 14:21:10.582936 server.go:163: New Provider is Connected from 127.0.0.1:56957
+2020/06/03 14:21:10.582936 server.go:67: Starting Reply between Provider: 127.0.0.1:56957 ---> Consumer: 127.0.0.1:56956
+2020/06/03 14:21:10.582936 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:21:46.175341 server.go:241: Error from Consumer(e39f6c4f-40df-49e7-a646-c5cf6030bdb1) : read tcp 127.0.0.1:23002->127.0.0.1:56956: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:21:46.175341 server.go:186: Error from Provider(6bc75244-7106-464f-bff8-05003a36c01b) : read tcp 127.0.0.1:23001->127.0.0.1:56957: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:22:28.713464 server.go:218: New Customer is Connected from 127.0.0.1:56985
+2020/06/03 14:22:28.714463 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[870f32f0-94bc-4464-80ea-03a801b0a609:Provider: nil ---> Consumer: 127.0.0.1:56985]
+----------------------------------------
+
+2020/06/03 14:22:31.712841 server.go:163: New Provider is Connected from 127.0.0.1:56987
+2020/06/03 14:22:31.712841 server.go:67: Starting Reply between Provider: 127.0.0.1:56987 ---> Consumer: 127.0.0.1:56985
+2020/06/03 14:22:31.712841 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:22:33.478381 server.go:241: Error from Consumer(870f32f0-94bc-4464-80ea-03a801b0a609) : read tcp 127.0.0.1:23002->127.0.0.1:56985: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:22:33.478381 server.go:186: Error from Provider(561f229b-812d-4180-bb2c-d73ee05ebe59) : read tcp 127.0.0.1:23001->127.0.0.1:56987: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:22:34.454390 server.go:218: New Customer is Connected from 127.0.0.1:56988
+2020/06/03 14:22:34.455389 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[eebbd67d-41a0-4095-9519-e8e27b7a390d:Provider: nil ---> Consumer: 127.0.0.1:56988]
+----------------------------------------
+
+2020/06/03 14:22:37.453082 server.go:163: New Provider is Connected from 127.0.0.1:56989
+2020/06/03 14:22:37.453082 server.go:67: Starting Reply between Provider: 127.0.0.1:56989 ---> Consumer: 127.0.0.1:56988
+2020/06/03 14:22:37.453082 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:22:50.412992 server.go:241: Error from Consumer(eebbd67d-41a0-4095-9519-e8e27b7a390d) : read tcp 127.0.0.1:23002->127.0.0.1:56988: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:22:50.412992 server.go:186: Error from Provider(4d314b39-bd9e-40b1-84e2-641bd0847cee) : read tcp 127.0.0.1:23001->127.0.0.1:56989: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:22:51.022025 server.go:218: New Customer is Connected from 127.0.0.1:56990
+2020/06/03 14:22:51.022025 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[7162beb4-217c-43cd-b55f-3e04df44aa81:Provider: nil ---> Consumer: 127.0.0.1:56990]
+----------------------------------------
+
+2020/06/03 14:22:54.020010 server.go:163: New Provider is Connected from 127.0.0.1:56993
+2020/06/03 14:22:54.020010 server.go:67: Starting Reply between Provider: 127.0.0.1:56993 ---> Consumer: 127.0.0.1:56990
+2020/06/03 14:22:54.020010 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:22:55.926036 server.go:241: Error from Consumer(7162beb4-217c-43cd-b55f-3e04df44aa81) : read tcp 127.0.0.1:23002->127.0.0.1:56990: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:22:55.926036 server.go:186: Error from Provider(03a5a009-c628-4073-baf7-bcc205a2a09b) : read tcp 127.0.0.1:23001->127.0.0.1:56993: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:23:49.439176 server.go:218: New Customer is Connected from 127.0.0.1:57008
+2020/06/03 14:23:49.439176 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[7658a787-cea3-4aab-b0a0-38ef1b5f1013:Provider: nil ---> Consumer: 127.0.0.1:57008]
+----------------------------------------
+
+2020/06/03 14:23:52.435196 server.go:163: New Provider is Connected from 127.0.0.1:57010
+2020/06/03 14:23:52.435196 server.go:67: Starting Reply between Provider: 127.0.0.1:57010 ---> Consumer: 127.0.0.1:57008
+2020/06/03 14:23:52.435196 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:23:54.981215 server.go:241: Error from Consumer(7658a787-cea3-4aab-b0a0-38ef1b5f1013) : read tcp 127.0.0.1:23002->127.0.0.1:57008: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:23:54.981215 server.go:186: Error from Provider(efe4d513-dc72-4904-8d22-fec07897040f) : read tcp 127.0.0.1:23001->127.0.0.1:57010: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:24:00.610483 server.go:218: New Customer is Connected from 127.0.0.1:57012
+2020/06/03 14:24:00.611483 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[38ae4935-dea4-4b69-85d6-2733ac260b8f:Provider: nil ---> Consumer: 127.0.0.1:57012]
+----------------------------------------
+
+2020/06/03 14:24:03.602500 server.go:163: New Provider is Connected from 127.0.0.1:57013
+2020/06/03 14:24:03.602500 server.go:67: Starting Reply between Provider: 127.0.0.1:57013 ---> Consumer: 127.0.0.1:57012
+2020/06/03 14:24:03.602500 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:24:06.506524 server.go:186: Error from Provider(45a5a836-f00b-4754-9f22-e12cf454484a) : read tcp 127.0.0.1:23001->127.0.0.1:57013: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:24:06.506524 server.go:241: Error from Consumer(38ae4935-dea4-4b69-85d6-2733ac260b8f) : read tcp 127.0.0.1:23002->127.0.0.1:57012: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:24:07.661534 server.go:218: New Customer is Connected from 127.0.0.1:57014
+2020/06/03 14:24:07.661534 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[66707031-d645-4159-a390-3dd50061e3ea:Provider: nil ---> Consumer: 127.0.0.1:57014]
+----------------------------------------
+
+2020/06/03 14:24:10.658551 server.go:163: New Provider is Connected from 127.0.0.1:57015
+2020/06/03 14:24:10.658551 server.go:67: Starting Reply between Provider: 127.0.0.1:57015 ---> Consumer: 127.0.0.1:57014
+2020/06/03 14:24:10.658551 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:24:16.927568 server.go:241: Error from Consumer(66707031-d645-4159-a390-3dd50061e3ea) : read tcp 127.0.0.1:23002->127.0.0.1:57014: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:24:16.927568 server.go:186: Error from Provider(d077bb71-1f8a-4a3e-a39c-ff6a805ea273) : read tcp 127.0.0.1:23001->127.0.0.1:57015: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:24:41.140160 server.go:218: New Customer is Connected from 127.0.0.1:57024
+2020/06/03 14:24:41.140160 server.go:113: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 1
+map[780d6568-7cd3-4f07-b21e-115398484189:Provider: nil ---> Consumer: 127.0.0.1:57024]
+----------------------------------------
+
+2020/06/03 14:24:44.135229 server.go:163: New Provider is Connected from 127.0.0.1:57025
+2020/06/03 14:24:44.135229 server.go:67: Starting Reply between Provider: 127.0.0.1:57025 ---> Consumer: 127.0.0.1:57024
+2020/06/03 14:24:44.135229 server.go:68: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:25:38.385616 server.go:186: Error from Provider(ae99da88-1009-4628-91cd-ed5f486134fd) : read tcp 127.0.0.1:23001->127.0.0.1:57025: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:25:38.385616 server.go:241: Error from Consumer(780d6568-7cd3-4f07-b21e-115398484189) : read tcp 127.0.0.1:23002->127.0.0.1:57024: use of closed network connection
+2020/06/03 14:25:42.097161 server.go:163: New Provider is Connected from 127.0.0.1:57039
+2020/06/03 14:25:42.097161 server.go:76: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 1
+map[defa04c7-eefb-4be8-a8d4-6ff784182062:Provider: 127.0.0.1:57039 ---> Consumer: nil]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:25:42.097161 server.go:218: New Customer is Connected from 127.0.0.1:57038
+2020/06/03 14:25:42.097161 server.go:104: Starting Reply between Provider: 127.0.0.1:57039 ---> Consumer: 127.0.0.1:57038
+2020/06/03 14:25:42.097161 server.go:105: 
+----- Relay Connection Pool Status -----
+Provider Pool Length: 0
+map[]
+Consumer Pool Length: 0
+map[]
+----------------------------------------
+
+2020/06/03 14:25:48.014280 server.go:186: Error from Provider(defa04c7-eefb-4be8-a8d4-6ff784182062) : read tcp 127.0.0.1:23001->127.0.0.1:57039: wsarecv: An existing connection was forcibly closed by the remote host.
+2020/06/03 14:25:48.014280 server.go:241: Error from Consumer(d23360f9-30ff-4da9-beab-7dd48e80e535) : read tcp 127.0.0.1:23002->127.0.0.1:57038: wsarecv: An existing connection was forcibly closed by the remote host.
