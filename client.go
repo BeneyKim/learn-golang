@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	// SERVER_ADDRESS = "cloudsim.ntel.ml"
-	SERVER_ADDRESS = "127.0.0.1"
+	SERVER_ADDRESS = "cloudsim.ntel.ml"
+	//SERVER_ADDRESS = "127.0.0.1"
 )
 
 func main() {
